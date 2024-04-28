@@ -10,7 +10,7 @@ namespace Implementación_firebase.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public bool True { get; private set; }
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -53,16 +53,23 @@ namespace Implementación_firebase.Controllers
             var tareaCargarArchivo = new FirebaseStorage(ruta, new FirebaseStorageOptions
             {
                 AuthTokenAsyncFactory = () => Task.FromResult(tokenUser),
-                ThrowOnCancel = True
-            }).Child("Archivos")
-            .Child(archivo.FileName)
-            .PutAsync(archivoASubir, cancellation.Token);
+                ThrowOnCancel = true
+            }
+            ).Child("Archivos")
+             .Child(archivo.FileName)
+             .PutAsync(archivoASubir, cancellation.Token);
 
             var urlArchivoCargado = await tareaCargarArchivo;
 
-            return RedirectToAction("VerImagen");
+            return RedirectToAction("VerImagen", new { urlImagen = urlArchivoCargado });
+
+
         }
 
-        
+        public ActionResult VerImagen(string urlImagen)
+        {
+            return View((object)urlImagen);
+        }
+
     }
 }

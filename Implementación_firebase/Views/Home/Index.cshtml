@@ -6,9 +6,13 @@
     <form asp-action="SubirArchivo" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="archivo">Seleccione el archivo a cargar</label>
-            <input type="file" class="form-control" id="archivos" name="archivo"/>
+            <input type="file" class="form-control" id="archivo" name="archivo"/>
         </div>
 
         <button type="submit" class="btn btn-primary" mb-2>Subir Archivo</button>
     </form>
 </div>
+
+<p>Aquí se ve la imagen</p>
+
+<img src="@Model" alt="Imagen subida" width="60%" height="60%"/>
